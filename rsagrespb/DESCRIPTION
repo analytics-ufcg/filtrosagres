@@ -1,0 +1,9 @@
+Package: rsagrespb
+Title: Biblioteca Utilitária de Acesso ao SAGRES-PB
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: Pacote contendo funções utilitárias para obtenção de dados da plataforma SAGRES do TCE do estado da Paraíba.
+Depends: R (>= 3.3.2)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
