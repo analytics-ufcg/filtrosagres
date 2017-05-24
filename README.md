@@ -8,7 +8,7 @@ Para instalar basta efetuar os seguintes comandos em seu R:
 install.packages('devtools')
 
 # Instala a biblioteca a partir do github
-devtools::install_github('analytics-ufcg/filtrosagres')
+devtools::install_github('analytics-ufcg/rsagrespb')
 
 # Carrega a biblioteca
 library(rsagrespb)
