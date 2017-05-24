@@ -1,5 +1,5 @@
 # Funções principais para manipulação dos dados do banco do SAGRES-PB
-#Nenhuma das funções restringe o ano. É preciso fazer isso após carregar os dados
+# Nenhuma das funções restringe o ano. É preciso fazer isso após carregar os dados
 
 
 #' Carrega a licitacoes de merenda realizadas no estado da Paraíba.
@@ -7,6 +7,7 @@
 #' 80% dos seus empenhos é filtrado como um empenho de merenda.
 #' O método de filtragem de empenhos pode ser visto na documentação de
 #' \code{\link{load_empenhos_merenda}}
+#' @export
 load_licitacoes_merenda <- function(){
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
 
@@ -30,6 +31,7 @@ load_licitacoes_merenda <- function(){
 #' Um empenho é considerado um empenho de merenda quando possui função
 #' de 'educação' e subelemento 'gênero alimentício' ou quando possui função
 #' de 'educação' e subfunção de 'alimentação e nutrição'
+#' @export
 load_empenhos_merenda <- function(){
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
 
@@ -52,6 +54,7 @@ load_empenhos_merenda <- function(){
 #' Os pagamentos de merenda são os pagamentos efetuados em empenhos
 #' classificados como empenhos de merenda. Para saber mais sobre o 
 #' método de filtragem de empenhos, consulte \code{\link{load_empenhos_merenda}}
+#' @export
 load_pagamentos_merenda <- function(){
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
 
@@ -79,6 +82,7 @@ load_pagamentos_merenda <- function(){
 #' As liquidações de merenda são as liquidações efetuadas em empenhos
 #' classificados como empenhos de merenda. Para saber mais sobre o 
 #' método de filtragem de empenhos, consulte \code{\link{load_empenhos_merenda}}
+#' @export
 load_liquidacoes_merenda <- function(){
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
 
@@ -107,6 +111,7 @@ load_liquidacoes_merenda <- function(){
 #' Os contratos de merenda são os contratos atrelados a licitações
 #' classificadas como licitações de merenda. Para saber mais sobre
 #' o método de filtragem de licitações, consulte \code{\link{load_licitacoes_merenda}}
+#' @export
 load_contratos_merenda <- function(){
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
 
@@ -140,6 +145,7 @@ load_contratos_merenda <- function(){
 #' Os aditivos de merenda são os aditivos atrelados a licitações
 #' classificadas como licitações de merenda. Para saber mais sobre
 #' o método de filtragem de licitações, consulte \code{\link{load_licitacoes_merenda}}
+#' @export
 load_aditivos_merenda <- function(){
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
 
@@ -176,7 +182,8 @@ load_aditivos_merenda <- function(){
   return(aditivos_merenda)
 }
 
-
+#' Carrega informações sobre os licitantes de merenda do estado da Paraíba
+#' @export
 load_licitantes_merenda <- function() {
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
   utils <- src_mysql('utils', group='ministerio-publico', password=NULL)

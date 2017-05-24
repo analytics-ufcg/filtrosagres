@@ -3,11 +3,10 @@ Title: Biblioteca Utilitária de Acesso ao SAGRES-PB
 Description: Biblioteca que reúne várias funções que possibilitam acesso aos dados do banco SAGRES do Tribunal de Contas do estado da Paraíba.
 Version: 0.1
 Encoding: UTF-8
-Depends: R (>= 3.3.2)
-LazyData: true
-Imports:
+Depends: R (>= 3.3.2),
     dplyr,
     tidyr,
     stringr,
     methods
+LazyData: true
 RoxygenNote: 6.0.1.9000

@@ -3,10 +3,15 @@
 #' Carrega os dados escolares de todas as cidades da Paraíba
 #' @param caminho_arquivo O caminho onde estão localizados os arquivos csv a serem processados
 #' @return Um único arquivo csv contendo dados escolares de todos os municípios da Paraíba
+#' @export
 load_dados_escolares <- function(caminho_arquivo) {
   
+  if(!dir.exists(caminho_arquivo)) {
+    stop('Diretório inválido')
+  }
+  
   #Pasta de origem dos arquivos csv deve ser modificada aqui
-  file_names <- Sys.glob(paste(caminho_arquivo, "*.csv"))
+  file_names <- Sys.glob(paste(caminho_arquivo, "*.csv", sep = '/'))
   
   dados <- data.frame()
   
