@@ -2,7 +2,8 @@
 % Please edit documentation in R/utils.R
 \name{load_dados_escolares}
 \alias{load_dados_escolares}
-\title{Carrega os dados escolares de todas as cidades da Paraíba}
+\title{Carrega varios arquivos com dados escolares de todas as cidades da Paraíba
+e os agrupa em um único arquivo}
 \usage{
 load_dados_escolares(caminho_arquivo)
 }
@@ -13,5 +14,6 @@ load_dados_escolares(caminho_arquivo)
 Um único arquivo csv contendo dados escolares de todos os municípios da Paraíba
 }
 \description{
-Carrega os dados escolares de todas as cidades da Paraíba
+Carrega varios arquivos com dados escolares de todas as cidades da Paraíba
+e os agrupa em um único arquivo
 }

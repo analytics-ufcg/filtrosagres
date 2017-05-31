@@ -2,7 +2,7 @@
 % Please edit documentation in R/rsagrespb.R
 \name{load_licitacoes_merenda}
 \alias{load_licitacoes_merenda}
-\title{Carrega a licitacoes de merenda realizadas no estado da Paraíba.
+\title{Carrega as licitacoes de merenda realizadas no estado da Paraíba.
 Uma licitação é considerada uma licitação de merenda se pelo menos
 80% dos seus empenhos é filtrado como um empenho de merenda.
 O método de filtragem de empenhos pode ser visto na documentação de
@@ -11,7 +11,7 @@ O método de filtragem de empenhos pode ser visto na documentação de
 load_licitacoes_merenda()
 }
 \description{
-Carrega a licitacoes de merenda realizadas no estado da Paraíba.
+Carrega as licitacoes de merenda realizadas no estado da Paraíba.
 Uma licitação é considerada uma licitação de merenda se pelo menos
 80% dos seus empenhos é filtrado como um empenho de merenda.
 O método de filtragem de empenhos pode ser visto na documentação de

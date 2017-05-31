@@ -1,6 +1,7 @@
 # Funções utilitárias para manipulação dos dados do banco do SAGRES-PB
 
-#' Carrega os dados escolares de todas as cidades da Paraíba
+#' Carrega varios arquivos com dados escolares de todas as cidades da Paraíba
+#' e os agrupa em um único arquivo
 #' @param caminho_arquivo O caminho onde estão localizados os arquivos csv a serem processados
 #' @return Um único arquivo csv contendo dados escolares de todos os municípios da Paraíba
 #' @export

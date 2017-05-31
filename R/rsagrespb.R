@@ -2,7 +2,7 @@
 # Nenhuma das funções restringe o ano. É preciso fazer isso após carregar os dados
 
 
-#' Carrega a licitacoes de merenda realizadas no estado da Paraíba.
+#' Carrega as licitacoes de merenda realizadas no estado da Paraíba.
 #' Uma licitação é considerada uma licitação de merenda se pelo menos
 #' 80% dos seus empenhos é filtrado como um empenho de merenda.
 #' O método de filtragem de empenhos pode ser visto na documentação de
@@ -10,177 +10,51 @@
 #' @export
 load_licitacoes_merenda <- function(){
   sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
-
+  
   query <- sql('
-      select l.*
-      from licitacao l
-      inner join classificacao_licitacao
-      using (cd_UGestora, nu_Licitacao, tp_Licitacao)
-      where pr_EmpenhosMerenda >= 0.8
-    ')
-
+               select l.*
+               from licitacao l
+               inner join classificacao_licitacao
+               using (cd_UGestora, nu_Licitacao, tp_Licitacao)
+               where pr_EmpenhosMerenda >= 0.8
+               ')
+  
   licitacoes_merenda <- tbl(sagres, query)
-
+  
   return(licitacoes_merenda)
 }
 
 
 
-
-#' Carrega os empenhos de merenda realizadas no estado da Paraíba.
-#' Um empenho é considerado um empenho de merenda quando possui função
-#' de 'educação' e subelemento 'gênero alimentício' ou quando possui função
-#' de 'educação' e subfunção de 'alimentação e nutrição'
+#' @title get_empenhos_licitacao_filt
+#' @description Retorna os empenhos da licitacao que corresponde aos códigos passados como parâmetro
+#' @param dbcon conexão com o banco de dados
+#' @param nu_licitacao o número da licitação cujo percentual de aditivos deve ser calculado
+#' @param cd_ugestora o código da unidade gestora que lançou a licitação em questão
+#' @param tp_licitacao o tipo da licitação em questão
+#' @param cd_funcao código de função a ser utilizado na filtragem
+#' @param cd_subfuncao código de subfunção a ser utilizado na filtragem
+#' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento) 
 #' @export
-load_empenhos_merenda <- function(){
-  sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
-
-  query <- sql('
-      select *
-      from empenhos
-      where cd_funcao = 12
-      and (cd_subelemento = 02 or cd_SubFuncao = 306)
-    ')
-
-  empenhos_merenda <- tbl(sagres, query)
-
-  return(empenhos_merenda)
+get_empenhos_licitacao_filt <- function(dbcon, nu_licitacao, cd_ugestora, tp_licitacao,
+                                   cd_funcao, cd_subfuncao, cd_subelemento = 99) {
+  sql(paste('
+              select *
+              from empenhos 
+              where nu_licitacao =', nu_licitacao,
+            ' and cd_ugestora =', cd_ugestora,
+            ' and tp_licitacao =', tp_licitacao,
+            ' and cd_funcao =', cd_funcao,
+            ' and cd_subfuncao =', cd_subfuncao,
+            ' and cd_subelemento =', cd_subelemento
+            ))
+  
+  empenhos <- tbl(dbcon, sql)
+  
+  return(empenhos)
 }
 
 
-
-
-#' Carrega os pagamentos de merenda realizados no estado da Paraíba.
-#' Os pagamentos de merenda são os pagamentos efetuados em empenhos
-#' classificados como empenhos de merenda. Para saber mais sobre o 
-#' método de filtragem de empenhos, consulte \code{\link{load_empenhos_merenda}}
-#' @export
-load_pagamentos_merenda <- function(){
-  sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
-
-  query <- sql('
-      select *
-      from pagamentos
-      inner join (
-        select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
-        from empenhos
-        where cd_funcao = 12
-        and (cd_subelemento = 02 or cd_SubFuncao = 306)
-      ) emm
-      using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
-    ')
-
-  pagamentos_merenda <- tbl(sagres, query)
-
-  return(pagamentos_merenda)
-}
-
-
-
-
-#' Carrega as liquidações de merenda realizadas no estado da Paraíba.
-#' As liquidações de merenda são as liquidações efetuadas em empenhos
-#' classificados como empenhos de merenda. Para saber mais sobre o 
-#' método de filtragem de empenhos, consulte \code{\link{load_empenhos_merenda}}
-#' @export
-load_liquidacoes_merenda <- function(){
-  sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
-
-  query <- sql('
-      select *
-      from liquidacao
-      inner join (
-        select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
-        from empenhos
-        where cd_funcao = 12
-        and (cd_subelemento = 02 or cd_SubFuncao = 306)
-      ) emm
-      using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
-    ')
-
-  liquidacoes_merenda <- tbl(sagres, query)
-    
-
-  return(liquidacoes_merenda)
-}
-
-
-
-
-#' Carrega os contratos de merenda realizados no estado da Paraíba.
-#' Os contratos de merenda são os contratos atrelados a licitações
-#' classificadas como licitações de merenda. Para saber mais sobre
-#' o método de filtragem de licitações, consulte \code{\link{load_licitacoes_merenda}}
-#' @export
-load_contratos_merenda <- function(){
-  sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
-
-  query <- sql('
-      select cd_UGestora, nu_Licitacao, tp_Licitacao
-      from licitacao l
-      inner join classificacao_licitacao cl
-      using (cd_UGestora, nu_Licitacao, tp_Licitacao)
-      where pr_EmpenhosMerenda >= 0.8
-    ')
-
-  licitacoes_merenda_min <- tbl(sagres, query) %>%
-    compute('lmm')
-
-  query <- sql('
-      select *
-      from contratos
-      inner join lmm
-      using (cd_Ugestora, nu_Licitacao, tp_Licitacao)
-    ')
-
-  contratos_merenda <- tbl(sagres, query)
-
-  return(contratos_merenda)
-}
-
-
-
-
-#' Carrega os aditivos de merenda realizados no estado da Paraíba.
-#' Os aditivos de merenda são os aditivos atrelados a licitações
-#' classificadas como licitações de merenda. Para saber mais sobre
-#' o método de filtragem de licitações, consulte \code{\link{load_licitacoes_merenda}}
-#' @export
-load_aditivos_merenda <- function(){
-  sagres <- src_mysql('sagres', group='ministerio-publico', password=NULL)
-
-  query <- sql('
-      select cd_UGestora, nu_Licitacao, tp_Licitacao
-      from licitacao l
-      inner join classificacao_licitacao cl
-      using (cd_UGestora, nu_Licitacao, tp_Licitacao)
-      where pr_EmpenhosMerenda >= 0.8
-    ')
-
-  licitacoes_merenda_min <- tbl(sagres, query) %>%
-    compute('lmm')
-
-  query <- sql('
-      select cd_UGestora, nu_Contrato
-      from contratos
-      inner join lmm
-      using (cd_Ugestora, nu_Licitacao, tp_Licitacao)
-    ')
-
-  contratos_merenda <- tbl(sagres, query)  %>%
-    compute('cmm')
-
-  query <- sql('
-      select *
-      from aditivos
-      inner join cmm
-      using (cd_Ugestora, nu_Contrato)
-    ')
-
-  aditivos_merenda <- tbl(sagres, query)
-
-  return(aditivos_merenda)
-}
 
 #' Carrega informações sobre os licitantes de merenda do estado da Paraíba
 #' @export
@@ -192,12 +66,12 @@ load_licitantes_merenda <- function() {
     collect()
   
   query <- sql('
-      select l.*
-      from licitacao l
-      inner join classificacao_licitacao
-      using (cd_UGestora, nu_Licitacao, tp_Licitacao)
-      where pr_EmpenhosMerenda >= 0.8
-    ') 
+               select l.*
+               from licitacao l
+               inner join classificacao_licitacao
+               using (cd_UGestora, nu_Licitacao, tp_Licitacao)
+               where pr_EmpenhosMerenda >= 0.8
+               ') 
   
   licitacoes <- tbl(sagres, query) %>%
     compute(name = 'lm') %>%
@@ -290,3 +164,119 @@ load_licitantes_merenda <- function() {
   return(licitantes)
 }
 
+
+
+#' @title get_percentual_aditivos
+#' @description Calcula o percentual do valor de aditivos que incide sobre uma licitação. 
+#' Um percentual de exatamente 0 indica que provavelmente o aditivo solicitado para a licitação não foi monetário, mas sim de tempo.
+#' Um retorno 'empty' indica que não há aditivos cadastrados para a licitação analisada.
+#' @param dbcon conexão com o banco de dados
+#' @param nu_licitacao o número da licitação cujo percentual de aditivos deve ser calculado
+#' @param cd_ugestora o código da unidade gestora que lançou a licitação em questão
+#' @param tp_licitacao o tipo da licitação em questão
+#' @export
+get_percentual_aditivos <- function(dbcon, nu_licitacao, cd_ugestora, tp_licitacao) {
+  
+  query <- sql(paste('
+                     select a.vl_aditivo/l.vl_licitacao as pr_aditivos 
+                     from licitacao l, contratos c, aditivos a 
+                     where l.nu_licitacao =', nu_licitacao,
+                     'and l.cd_ugestora =', cd_ugestora,
+                     'and l.tp_licitacao =', tp_licitacao,
+                     'and l.cd_ugestora = c.cd_ugestora 
+                     and l.nu_licitacao = c.nu_licitacao 
+                     and l.tp_licitacao = c.tp_licitacao 
+                     and c.nu_contrato = a.nu_contrato 
+                     and c.cd_ugestora = a.cd_ugestora
+                     '))
+  
+  percentual <- tbl(dbcon, query) %>%
+    collect()
+  
+  result <- percentual$pr_aditivos
+  
+  return(result)
+}
+
+
+
+#' @title get_empenhos_filtrados
+#' @description Filtra os empenhos realizados no estado da Paraíba a partir de seu 
+#' código de função, código de subfunção e código de subelemento.
+#' @param dbcon conexão com o banco de dados
+#' @param cd_funcao código de função a ser utilizado na filtragem
+#' @param cd_subfuncao código de subfunção a ser utilizado na filtragem
+#' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)
+#' @export
+get_empenhos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99){
+  query <- sql(paste('
+                     select *
+                     from empenhos
+                     where cd_funcao =', cd_funcao,
+                     'and (cd_subfuncao =', cd_subfuncao, 
+                     'or cd_subelemento =', cd_subelemento, ')'
+  ))
+  
+  empenhos <- tbl(dbcon, query)
+  
+  return(empenhos)
+}
+
+
+
+
+#' @title get_pagamentos_filtrados
+#' @description Filtra os pagamentos realizados no estado da Paraíba a partir do 
+#' código de função, código de subfunção e código de subelementodos empenhos a que eles estão relacionados.
+#' @param dbcon conexão com o banco de dados
+#' @param cd_funcao código de função a ser utilizado na filtragem
+#' @param cd_subfuncao código de subfunção a ser utilizado na filtragem
+#' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)
+#' @export
+get_pagamentos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99){
+  query <- sql(paste('
+                     select *
+                     from pagamentos
+                     inner join (
+                     select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
+                     from empenhos
+                     where cd_funcao =', cd_funcao,
+                     'and (cd_subelemento =', cd_subelemento ,'or cd_subfuncao =', cd_subfuncao, ')
+                     ) emm
+                     using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
+                     '))
+  
+  pagamentos <- tbl(dbcon, query)
+  
+  return(pagamentos)
+}
+
+
+
+
+#' @title get_liquidacoes_filtradas
+#' @description Filtra as liquidações realizadas no estado da Paraíba a partir do 
+#' código de função, código de subfunção e código de subelemento dos empenhos a que elas estão relacionadas.
+#' @param dbcon conexão com o banco de dados
+#' @param cd_funcao código de função a ser utilizado na filtragem
+#' @param cd_subfuncao código de subfunção a ser utilizado na filtragem
+#' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)
+#' @export
+get_liquidacoes_filtradas <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99){
+  query <- sql(paste('
+      select *
+      from liquidacao
+      inner join (
+        select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
+        from empenhos
+        where cd_funcao =', cd_funcao,
+                     'and (cd_subelemento =', cd_subelemento , 'or cd_subfuncao =', cd_subfuncao, ')
+      ) emm
+      using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
+    '))
+  
+  liquidacoes <- tbl(dbcon, query)
+  
+  
+  return(liquidacoes)
+}
