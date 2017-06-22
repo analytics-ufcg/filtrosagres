@@ -1,7 +1,7 @@
 Package: rsagrespb
 Title: Biblioteca Utilitária de Acesso ao SAGRES-PB
 Description: Biblioteca que reúne várias funções que possibilitam acesso aos dados do banco SAGRES do Tribunal de Contas do estado da Paraíba.
-Version: 0.1
+Version: 1.0
 Encoding: UTF-8
 Depends: R (>= 3.3.2),
     dplyr,
