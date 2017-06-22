@@ -16,6 +16,6 @@ get_liquidacoes_filtradas(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99)
 \item{cd_subelemento}{código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)}
 }
 \description{
-Filtra as liquidações realizadas no estado da Paraíba a partir do 
+Filtra as liquidações realizadas no estado da Paraíba a partir do
 código de função, código de subfunção e código de subelemento dos empenhos a que elas estão relacionadas.
 }

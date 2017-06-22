@@ -16,6 +16,6 @@ get_empenhos_filtrados(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99)
 \item{cd_subelemento}{código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)}
 }
 \description{
-Filtra os empenhos realizados no estado da Paraíba a partir de seu 
+Filtra os empenhos realizados no estado da Paraíba a partir de seu
 código de função, código de subfunção e código de subelemento.
 }

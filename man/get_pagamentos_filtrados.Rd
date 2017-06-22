@@ -16,6 +16,6 @@ get_pagamentos_filtrados(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99)
 \item{cd_subelemento}{código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)}
 }
 \description{
-Filtra os pagamentos realizados no estado da Paraíba a partir do 
+Filtra os pagamentos realizados no estado da Paraíba a partir do
 código de função, código de subfunção e código de subelementodos empenhos a que eles estão relacionados.
 }

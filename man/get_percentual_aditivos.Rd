@@ -16,7 +16,7 @@ get_percentual_aditivos(dbcon, nu_licitacao, cd_ugestora, tp_licitacao)
 \item{tp_licitacao}{o tipo da licitação em questão}
 }
 \description{
-Calcula o percentual do valor de aditivos que incide sobre uma licitação. 
+Calcula o percentual do valor de aditivos que incide sobre uma licitação.
 Um percentual de exatamente 0 indica que provavelmente o aditivo solicitado para a licitação não foi monetário, mas sim de tempo.
 Um retorno 'empty' indica que não há aditivos cadastrados para a licitação analisada.
 ATENÇÃO: Não é necessário realizar o collect do retorno deste método.
