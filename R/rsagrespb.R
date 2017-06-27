@@ -99,20 +99,22 @@ get_percentual_aditivos <- function(dbcon, nu_licitacao, cd_ugestora, tp_licitac
 #' @param dbcon conexão com o banco de dados
 #' @param cd_funcao código de função a ser utilizado na filtragem
 #' @param cd_subfuncao código de subfunção a ser utilizado na filtragem
-#' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)
+#' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: "99" (Sem subelemento)
 #' @export
-get_empenhos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99){
-  query <- sql(paste('
-                     select *
-                     from Empenhos
-                     where cd_funcao =', cd_funcao,
-                     'and (cd_subfuncao =', cd_subfuncao,
-                     'or cd_subelemento =', cd_subelemento, ')'
-  ))
+get_empenhos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = '99') {
+  template <- ('
+    SELECT *
+    FROM Empenhos
+    WHERE cd_Funcao = %d
+    AND (cd_Subfuncao = %d OR cd_SubElemento = "%s")
+  ')
 
-  empenhos <- tbl(dbcon, query)
+  query <- template %>%
+    sprintf(cd_funcao, cd_subfuncao, cd_subelemento) %>%
+    sql()
 
-  return(empenhos)
+  tbl(dbcon, query) %>%
+    return()
 }
 
 
