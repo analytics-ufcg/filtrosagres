@@ -129,21 +129,24 @@ get_empenhos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelement
 #' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)
 #' @export
 get_pagamentos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99){
-  query <- sql(paste('
-                     select *
-                     from Pagamentos
-                     inner join (
-                     select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
-                     from Empenhos
-                     where cd_funcao =', cd_funcao,
-                     'and (cd_subelemento =', cd_subelemento ,'or cd_subfuncao =', cd_subfuncao, ')
-                     ) emm
-                     using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
-                     '))
+  template <- ('
+               select *
+               from Pagamentos
+               inner join (
+               select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
+               from Empenhos
+               where cd_Funcao = %d
+               and (cd_Subfuncao = %d OR cd_SubElemento = "%s")
+               ) emm
+               using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
+  ')
 
-  pagamentos <- tbl(dbcon, query)
-
-  return(pagamentos)
+  query <- template %>%
+    sprintf(cd_funcao, cd_subfuncao, cd_subelemento) %>%
+    sql()
+  
+  tbl(dbcon, query) %>%
+    return()
 }
 
 
@@ -158,21 +161,24 @@ get_pagamentos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subeleme
 #' @param cd_subelemento código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)
 #' @export
 get_liquidacoes_filtradas <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99){
-  query <- sql(paste('
-      select *
-      from Liquidacao
-      inner join (
-        select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
-        from Empenhos
-        where cd_funcao =', cd_funcao,
-                     'and (cd_subelemento =', cd_subelemento , 'or cd_subfuncao =', cd_subfuncao, ')
-      ) emm
-      using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
-    '))
+  template <- ('
+              select *
+              from Liquidacao
+              inner join (
+                select cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho
+                from Empenhos
+                where cd_Funcao = %d
+                and (cd_Subfuncao = %d OR cd_SubElemento = "%s")
+              ) emm
+              using (cd_Ugestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho)
+  ')
 
-  liquidacoes <- tbl(dbcon, query)
+  query <- template %>%
+    sprintf(cd_funcao, cd_subfuncao, cd_subelemento) %>%
+    sql()
+  
+  tbl(dbcon, query) %>%
+    return()
 
-
-  return(liquidacoes)
 }
 
