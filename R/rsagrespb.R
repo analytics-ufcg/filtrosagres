@@ -2,6 +2,7 @@
 # A menos que declarado o contrário na descrição do método, é sempre necessário coletar os dados retornados por esses métodos
 # antes de utilizá-los. Isso pode ser feito a partir de uma chamada a dplyr::collect()
 
+
 #' @title get_empenhos_licitacao_filt
 #' @description Retorna os empenhos da licitacao que corresponde aos códigos passados como parâmetro
 #' @param dbcon conexão com o banco de dados
@@ -31,7 +32,6 @@ get_empenhos_licitacao_filt <- function(dbcon, nu_licitacao, cd_ugestora, tp_lic
 }
 
 
-
 #' @title get_valor_empenhos_licitacoes
 #' @description Retorna o valor total dos empenhos que correspondem aos códigos passados como parâmetro em todas as licitações
 #' @param dbcon conexão com o banco de dados
@@ -55,7 +55,6 @@ get_valor_empenhos_licitacoes <- function(dbcon, cd_funcao, cd_subfuncao, cd_sub
 
   return(valor_empenhos)
 }
-
 
 
 #' @title get_percentual_aditivos
@@ -92,7 +91,6 @@ get_percentual_aditivos <- function(dbcon, nu_licitacao, cd_ugestora, tp_licitac
 }
 
 
-
 #' @title get_empenhos_filtrados
 #' @description Filtra os empenhos realizados no estado da Paraíba a partir de seu
 #' código de função, código de subfunção e código de subelemento.
@@ -117,7 +115,47 @@ get_empenhos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelement
     return()
 }
 
-
+#' @title get_licitacoes
+#' @description
+#'   recupera as licitações cujos empenhos apresentam todos código de função,
+#'   código de subfunção e código de subelemento iguais aos fornecidos
+#' @param dbcon conexão com o banco de dados
+#' @param cd_funcao código de função (integer)
+#' @param cd_subfuncao código de subfunção (integer)
+#' @param cd_subelemento código de subelemento (character)
+#' @export
+get_licitacoes <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelemento) {
+  template <- ('
+    SELECT lic.*
+    FROM
+    ( SELECT A.*, COUNT(*) total
+      FROM
+      ( SELECT *, COUNT(*) filtro
+        FROM
+        ( SELECT e.*
+          FROM Empenhos e
+          WHERE cd_Funcao = %d
+          AND (cd_Subfuncao = %d OR cd_Subelemento = "%s")
+        ) AS emp
+        GROUP BY cd_UGestora, nu_Licitacao, tp_Licitacao
+      ) AS A
+      INNER JOIN Empenhos
+      USE INDEX (FK_Empenhos_Licitacao)
+      USING (cd_UGestora, nu_Licitacao, tp_Licitacao)
+      GROUP BY cd_UGestora, nu_Licitacao, tp_Licitacao
+    ) AS B
+    INNER JOIN Licitacao lic
+    USING (cd_UGestora, nu_Licitacao, tp_Licitacao)
+    WHERE filtro = total
+  ')
+  
+  query <- template %>%
+    sprintf(cd_funcao, cd_subfuncao, cd_subelemento) %>%
+    sql()
+  
+  tbl(dbcon, query) %>%
+    return()
+}
 
 
 #' @title get_pagamentos_filtrados
@@ -150,8 +188,6 @@ get_pagamentos_filtrados <- function(dbcon, cd_funcao, cd_subfuncao, cd_subeleme
 }
 
 
-
-
 #' @title get_liquidacoes_filtradas
 #' @description Filtra as liquidações realizadas no estado da Paraíba a partir do
 #' código de função, código de subfunção e código de subelemento dos empenhos a que elas estão relacionadas.
@@ -181,4 +217,3 @@ get_liquidacoes_filtradas <- function(dbcon, cd_funcao, cd_subfuncao, cd_subelem
     return()
 
 }
-

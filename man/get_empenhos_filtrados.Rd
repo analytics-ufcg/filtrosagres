@@ -4,7 +4,7 @@
 \alias{get_empenhos_filtrados}
 \title{get_empenhos_filtrados}
 \usage{
-get_empenhos_filtrados(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99)
+get_empenhos_filtrados(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = "99")
 }
 \arguments{
 \item{dbcon}{conexão com o banco de dados}
@@ -13,7 +13,7 @@ get_empenhos_filtrados(dbcon, cd_funcao, cd_subfuncao, cd_subelemento = 99)
 
 \item{cd_subfuncao}{código de subfunção a ser utilizado na filtragem}
 
-\item{cd_subelemento}{código de subelemento a ser utilizado na filtragem. Valor padrão: 99 (Sem subelemento)}
+\item{cd_subelemento}{código de subelemento a ser utilizado na filtragem. Valor padrão: "99" (Sem subelemento)}
 }
 \description{
 Filtra os empenhos realizados no estado da Paraíba a partir de seu

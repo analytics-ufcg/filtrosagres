@@ -2,6 +2,7 @@
 
 export(get_empenhos_filtrados)
 export(get_empenhos_licitacao_filt)
+export(get_licitacoes)
 export(get_liquidacoes_filtradas)
 export(get_pagamentos_filtrados)
 export(get_percentual_aditivos)
