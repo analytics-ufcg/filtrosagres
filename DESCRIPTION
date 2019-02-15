@@ -1,12 +1,21 @@
 Package: rsagrespb
-Title: Biblioteca Utilitária de Acesso ao SAGRES-PB
-Description: Biblioteca que reúne várias funções que possibilitam acesso aos dados do banco SAGRES do Tribunal de Contas do estado da Paraíba.
-Version: 1.3
+Type: Package
+Title: Carrega informações sobre execucação orçamentária disponíveis na plataforma Sagres (TCE)
+Version: 0.1.0
+Authors@R: as.person(c(
+    "Júlio Neves <juliocnevess@gmail.com> [aut, cre]", 
+    "Gileade Silva [aut]",
+    "Talita Lôbo [aut]"
+  ))
+Description: Carrega informações sobre os contratos disponíveis na plataforma Sagres.
+    Atualmente restrito aos contratos de obras.
+License: MIT
 Encoding: UTF-8
-Depends: R (>= 3.3.2),
-    dplyr,
-    tidyr,
-    stringr,
-    methods
 LazyData: true
-RoxygenNote: 6.0.1.9000
+Depends: R (>= 3.4.4)
+Imports: tidyr(>= 0.8.2),
+    dplyr(>= 0.7.8),
+    purrr(>= 0.2.5),
+    DBI (>= 1.0.0),
+    RMySQL (>= 0.10.15)
+RoxygenNote: 6.1.0
