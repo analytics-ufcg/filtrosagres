@@ -2,14 +2,11 @@
 % Please edit documentation in R/gabarito_carrega_dados.R
 \name{carrega_gabarito_sancoes}
 \alias{carrega_gabarito_sancoes}
-\title{carrega_gabarito_sancoes}
+\title{Carrega dados das sanções aplicadas no CEIS e CNEP}
 \usage{
-carrega_gabarito_sancoes(data_versao = format(Sys.time(), "\%Y\%m\%d"),
-  ano_inicial = 2015, ano_final = 2016)
+carrega_gabarito_sancoes(ano_inicial = 2015, ano_final = 2016)
 }
 \arguments{
-\item{data_versao}{A versão dos dados que deve ser obtida do Portal da Transparência no formato YYYYmmdd (As atualizações são diárias)}
-
 \item{ano_inicial}{Ano em que se inicia o intervalo de busca por sanções}
 
 \item{ano_final}{Ano em que se finda o intervalo de busca por sanções}
@@ -18,7 +15,7 @@ carrega_gabarito_sancoes(data_versao = format(Sys.time(), "\%Y\%m\%d"),
 Dataframe com dados do CNEP e do CEIS
 }
 \description{
-Carrega dados de empresas presentes no CNEP e no CEIS cujas sanções foram aplicadas em um intervalo especificado.
+Carrega do Portal da Transparência os dados de empresas presentes no CNEP e no CEIS cujas sanções foram aplicadas em um intervalo especificado.
 O dataframe retornado conta com as seguintes variáveis:
     \describe{
         \item{cd_Sancionado}{CPF ou CNPJ do sancionado}

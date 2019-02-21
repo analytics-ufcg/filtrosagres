@@ -1,6 +1,4 @@
-# dt_Inicio = data_inicio, vl_Ganho = total_ganho, pr_ContratoTotalGanho = razao_contrato_por_vl_recebido
-# num_contratos = qt_Contratos, media_num_contratos = md_Contratos
-#' @title carrega_info_contrato
+#' @title Carrega informações de um contrato
 #' @description Carrega a informações de contratos associadas a CNPJ's
 #'    \describe{
 #'         \item{cd_UGestora}{Unidade Gestora de origem}

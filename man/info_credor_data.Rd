@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_valida_info_fornecimento_credor.R
 \name{info_credor_data}
 \alias{info_credor_data}
-\title{info_credor_data}
+\title{Carrega informações de credores}
 \usage{
 info_credor_data(cd_Credor, dt_Inicio)
 }

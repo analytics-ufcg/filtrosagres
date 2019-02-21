@@ -1,4 +1,4 @@
-#' @title carrega_empenhos
+#' @title Carrega empenhos
 #' @description Carrega a lista de empenhos destinado a um grupo de credores em um intervalo de tempo.
 #'     O dataframe retornado conta com as seguintes variáveis:
 #'     \describe{
@@ -68,7 +68,7 @@ carrega_empenhos <- function(ano_inicial = 2014, ano_final = 2014, lista_cnpjs) 
 
 
 
-#' @title carrega_empenhos_data_limite
+#' @title Carrega empenhos em um intervalo de tempo
 #' @description Carrega a lista de empenhos realizados em um intervalo de tempo.
 #'     O dataframe retornado conta com as seguintes variáveis.
 #'     \describe{
@@ -177,7 +177,7 @@ carrega_empenhos_data_limite <- function(ano_inicial = 2014, ano_final = 2014, c
 
 
 
-#' @title empenhos_credores_data
+#' @title Carrega informações dos credores
 #' @description Cruza informações sobre empenhos, pagamentos e estornos a partir de uma data de limite.
 #' Retorna todos os empenhos até esta data num dataframe com as variáveis:
 #'    \describe{

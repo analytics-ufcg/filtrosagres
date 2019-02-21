@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_fornecedores_pagamentos.R
 \name{carrega_contratos}
 \alias{carrega_contratos}
-\title{carrega_contratos}
+\title{Carrega contratos}
 \usage{
 carrega_contratos(ano_inicial = 2014, ano_final = 2014,
   limite_inferior = 140000)

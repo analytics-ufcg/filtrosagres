@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_licitacoes.R
 \name{carrega_licitacoes_vencedores}
 \alias{carrega_licitacoes_vencedores}
-\title{carrega_licitacoes_vencedores}
+\title{Carrega vencedores de licitações}
 \usage{
 carrega_licitacoes_vencedores(ano_inicial = 2011, ano_final = 2016)
 }

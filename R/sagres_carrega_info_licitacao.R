@@ -1,8 +1,4 @@
-# data_inicio = dt_Inicio, n_licitacoes_venceu = qt_LicitacoesVenceu, montante_lic_venceu = vl_TotalLicitacoesVenceu,
-# n_licitacoes_part = qt_LicitacoesParticipou,
-# n_licitacoes_part_venceu = qt_LicitacoesPartVenceu, perc_vitoria = pr_Vitorias,
-# n_licitacoes = qt_LicitacoesParticipou/qt_LicitacoesGanhou, media_n_licitacoes_part = md_LicitacoesParticipou, media_n_licitacoes_venceu = md_LicitacoesVenceu
-#' @title carrega_info_licitacao
+#' @title Carrega informações de licitações
 #' @description Carrega a informações de licitações associadas a CNPJ's participantes da licitação.
 #'     O dataframe retornado conta com as seguintes variáveis:
 #'    \describe{

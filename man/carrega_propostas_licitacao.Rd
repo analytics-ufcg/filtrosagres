@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_licitacoes.R
 \name{carrega_propostas_licitacao}
 \alias{carrega_propostas_licitacao}
-\title{carrega_propostas_licitacao}
+\title{Carrega propostas de licitações}
 \usage{
 carrega_propostas_licitacao(ano_inicial = 2011, ano_final = 2016)
 }

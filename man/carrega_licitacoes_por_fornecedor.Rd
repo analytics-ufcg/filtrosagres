@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_fornecedores_pagamentos.R
 \name{carrega_licitacoes_por_fornecedor}
 \alias{carrega_licitacoes_por_fornecedor}
-\title{carrega_licitacoes_por_fornecedor}
+\title{Carrega licitações por fornecedor}
 \usage{
 carrega_licitacoes_por_fornecedor(ano_inicial = 2014, ano_final = 2014,
   lista_cnpjs)

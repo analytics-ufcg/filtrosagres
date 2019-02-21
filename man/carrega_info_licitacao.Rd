@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_info_licitacao.R
 \name{carrega_info_licitacao}
 \alias{carrega_info_licitacao}
-\title{carrega_info_licitacao}
+\title{Carrega informações de licitações}
 \usage{
 carrega_info_licitacao(ano_inicial = 2011, ano_final = 2016,
   cnpjs_datas_contratos)

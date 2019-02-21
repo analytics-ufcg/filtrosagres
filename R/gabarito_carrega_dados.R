@@ -1,4 +1,4 @@
-#' @title carrega_cnep
+#' @title Carrega dados do CNEP
 #' @description Carrega do Portal da Transparência os dados de empresas presentes no CNEP cujas sanções foram aplicadas em um intervalo especificado.
 #' O dataframe retornado conta com as seguintes variáveis:
 #'     \describe{
@@ -14,7 +14,7 @@ carrega_cnep <- function(ano_inicial = 2015, ano_final = 2016) {
 
   dir_temporario <- tempdir()
   arq_temporario <- tempfile(fileext = ".zip")
-  data_versao = format(Sys.time(), "%Y%m%d")
+  data_versao <- format(Sys.time(), "%Y%m%d")
 
   download.file(paste0("http://www.portaltransparencia.gov.br/download-de-dados/cnep/", data_versao), arq_temporario, "curl")
   arq_descompactado <- unzip(arq_temporario, exdir = dir_temporario)
@@ -37,7 +37,7 @@ carrega_cnep <- function(ano_inicial = 2015, ano_final = 2016) {
 }
 
 
-#' @title carrega_ceis
+#' @title Carrega dados do CEIS
 #' @description Carrega do Portal da Transparência os dados de empresas presentes no CEIS cujas sanções foram aplicadas em um intervalo especificado.
 #' O dataframe retornado conta com as seguintes variáveis:
 #'     \describe{
@@ -53,6 +53,7 @@ carrega_ceis <- function(ano_inicial = 2015, ano_final = 2016) {
 
   dir_temporario <- tempdir()
   arq_temporario <- tempfile(fileext = ".zip")
+  data_versao <- format(Sys.time(), "%Y%m%d")
 
   download.file(paste0("http://www.portaltransparencia.gov.br/download-de-dados/ceis/", data_versao), arq_temporario, "curl")
   arq_descompactado <- unzip(arq_temporario, exdir = dir_temporario)
@@ -74,7 +75,7 @@ carrega_ceis <- function(ano_inicial = 2015, ano_final = 2016) {
   return(ceis)
 }
 
-#' @title carrega_gabarito_sancoes
+#' @title Carrega dados das sanções aplicadas no CEIS e CNEP
 #' @description Carrega do Portal da Transparência os dados de empresas presentes no CNEP e no CEIS cujas sanções foram aplicadas em um intervalo especificado.
 #' O dataframe retornado conta com as seguintes variáveis:
 #'     \describe{

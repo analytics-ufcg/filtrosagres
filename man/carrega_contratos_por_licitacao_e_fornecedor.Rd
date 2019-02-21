@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_fornecedores_pagamentos.R
 \name{carrega_contratos_por_licitacao_e_fornecedor}
 \alias{carrega_contratos_por_licitacao_e_fornecedor}
-\title{carrega_contratos_por_licitacao_e_fornecedor}
+\title{Carrega contratos de uma licitação}
 \usage{
 carrega_contratos_por_licitacao_e_fornecedor(ano_inicial = 2014,
   ano_final = 2014)

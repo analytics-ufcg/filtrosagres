@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_licitacoes.R
 \name{carrega_participantes}
 \alias{carrega_participantes}
-\title{carrega_participantes}
+\title{Carrega participantes de licitações}
 \usage{
 carrega_participantes(lista_cnpjs)
 }

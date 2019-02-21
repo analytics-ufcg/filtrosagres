@@ -1,5 +1,4 @@
-# data_inicio = dt_Inicio, n_propostas = qt_Propostas, media_n_propostas = md_Propostas
-#' @title carrega_info_proposta
+#' @title Carrega informações de propostas
 #' @description Carrega a informações do número de propostas de CNPJS associadas a licitações dentro de um intervalo de tempo.
 #'     Retorna um dataframe com as seguintes variáveis:
 #'     \describe{

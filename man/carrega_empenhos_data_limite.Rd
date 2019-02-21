@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_empenhos.R
 \name{carrega_empenhos_data_limite}
 \alias{carrega_empenhos_data_limite}
-\title{carrega_empenhos_data_limite}
+\title{Carrega empenhos em um intervalo de tempo}
 \usage{
 carrega_empenhos_data_limite(ano_inicial = 2014, ano_final = 2014,
   cnpjs_datas_contratos)

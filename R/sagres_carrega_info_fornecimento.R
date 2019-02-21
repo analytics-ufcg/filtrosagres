@@ -1,8 +1,4 @@
-## Ano inicial considerado para o cálculo das informações de empenhos é o ano inicial do SAGRES.
-# data_inicio = dt_Inicio, data = dt_Inicio, total_ganho = vl_Ganho, total_pago = vl_Pago, total_estornado = vl_Estornado,
-# n_municipios = qt_Municipios, media_municipios = md_Municipios, n_ugestora = qt_UGestoras, media_ugestora = md_UGestoras,
-# media_ganho = md_Ganho
-#' @title carrega_info_fornecimento
+#' @title Carrega informações de fornecimento
 #' @description Calcula informações sobre o fornecimento de uma lista de CNPj's.
 #'    \describe{
 #'         \item{cd_Credor}{Código do credor (CPF, CNPJ)}

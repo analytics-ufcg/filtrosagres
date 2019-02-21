@@ -1,4 +1,4 @@
-#' @title info_credor_data
+#' @title Carrega informações de credores
 #' @description Recupera informações de empenhos a partir de um CPF/CNPJ e uma data limite. As informações são o total pago e o total estornado
 #' @param cd_Credor Código do Credor (CPF ou CNPJ)
 #' @param dt_Inicio Data limite para a data do pagamento e do estorno

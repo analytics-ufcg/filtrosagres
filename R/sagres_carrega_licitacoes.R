@@ -1,4 +1,4 @@
-#' @title carrega_licitacoes
+#' @title Carrega licitações
 #' @description Carrega a informações de licitações associadas a CNPJ's participantes da licitação.
 #'     O dataframe retornado conta com as seguintes variáveis.
 #'     \describe{
@@ -38,7 +38,7 @@ carrega_licitacoes <- function(ano_inicial = 2011, ano_final = 2016){
 
 }
 
-#' @title carrega_participantes
+#' @title Carrega participantes de licitações
 #' @description Carrega informações de participação em licitações a partir de uma lista de CNPJ's
 #'     O dataframe retornado conta com as seguintes variáveis.
 #'     \describe{
@@ -77,7 +77,7 @@ carrega_participantes <- function(lista_cnpjs) {
 
 }
 
-#' @title carrega_licitacoes_vencedores
+#' @title Carrega vencedores de licitações
 #' @description Carrega lista de licitações realizadas em um determinado período de tempo
 #'     O dataframe retornado conta com as seguintes variáveis.
 #'     \describe{
@@ -133,7 +133,7 @@ carrega_licitacoes_vencedores <- function(ano_inicial = 2011, ano_final = 2016) 
     return(licitacoes_vencedores)
 }
 
-#' @title carrega_propostas_licitacao
+#' @title Carrega propostas de licitações
 #' @description Carrega a informações das propostas associadas a licitações que ocorreram dentro de um intervalo de tempo
 #'     O dataframe retornado conta com as seguintes variáveis.
 #'     \describe{

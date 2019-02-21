@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_empenhos.R
 \name{empenhos_credores_data}
 \alias{empenhos_credores_data}
-\title{empenhos_credores_data}
+\title{Carrega informações dos credores}
 \usage{
 empenhos_credores_data(data_limite_superior, empenhos, pagamentos,
   estornos_pagamento, cnpjs_datas_contratos)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_empenhos.R
 \name{carrega_empenhos}
 \alias{carrega_empenhos}
-\title{carrega_empenhos}
+\title{Carrega empenhos}
 \usage{
 carrega_empenhos(ano_inicial = 2014, ano_final = 2014, lista_cnpjs)
 }

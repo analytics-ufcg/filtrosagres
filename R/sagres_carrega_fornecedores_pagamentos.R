@@ -1,5 +1,4 @@
-# num_empenhos = qt_Empenhos, valor_pago = vl_Pago, valor_estornado = vl_Estornado, total_ganho = vl_Ganho
-#' @title carrega_licitacoes_por_fornecedor
+#' @title Carrega licitações por fornecedor
 #' @description Carrega a lista de licitações por fornecedor com informações de pagamentos em um intervalo de tempo.
 #' O dataframe retornado conta com as seguintes variáveis:
 #'     \describe{
@@ -34,7 +33,7 @@ carrega_licitacoes_por_fornecedor <- function(ano_inicial = 2014, ano_final = 20
     return(licitacoes_por_fornecedor)
 }
 
-#' @title carrega_contratos
+#' @title Carrega contratos
 #' @description Carrega contratos realizados em um intervalo de tempo
 #' O dataframe retornado conta com as seguintes variáveis:
 #'     \describe{
@@ -80,7 +79,7 @@ carrega_contratos <- function(ano_inicial = 2014, ano_final = 2014, limite_infer
     return(contratos)
 }
 
-#' @title carrega_contratos_por_licitacao_e_fornecedor
+#' @title Carrega contratos de uma licitação
 #' @description Carrega contratos realizados em um intervalo de tempo agrupados por licitação e por fornecedor
 #' O dataframe retornado conta com as seguintes variáveis:
 #'     \describe{

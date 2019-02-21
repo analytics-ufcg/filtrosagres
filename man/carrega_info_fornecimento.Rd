@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_info_fornecimento.R
 \name{carrega_info_fornecimento}
 \alias{carrega_info_fornecimento}
-\title{carrega_info_fornecimento}
+\title{Carrega informações de fornecimento}
 \usage{
 carrega_info_fornecimento(ano_inicial, ano_final, cnpjs_datas_contratos)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagres_carrega_info_proposta.R
 \name{carrega_info_proposta}
 \alias{carrega_info_proposta}
-\title{carrega_info_proposta}
+\title{Carrega informações de propostas}
 \usage{
 carrega_info_proposta(ano_inicial = 2011, ano_final = 2016,
   cnpjs_datas_contratos)
