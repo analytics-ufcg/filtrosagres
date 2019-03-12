@@ -19,7 +19,6 @@ configurada no arquivo ~/.my.cnf sob o nome de grupo *rsagrespb*, de acordo com 
 
 ```
 [rsagrespb]
-database                = sagres_municipal
 user                    = ***
 password                = ***
 host                    = ***
