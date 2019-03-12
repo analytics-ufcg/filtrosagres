@@ -11,12 +11,13 @@
 #'         \item{md_Ganho}{Valor médio anual ganho pelo credor até a assinatura do contrato}
 #'         \item{vl_Ganho}{Valor ganho pelo credor até a assinatura do contrato}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do intervalo de tempo
 #' @param ano_final Ano final do intervalo de tempo
 #' @param cnpjs_datas_contratos Lista de CNPJ's e de datas de início de contrato para o cálculo das informações de fornecimento.
 #' @return Data frame com informações sobre as empresas com uma data de limite superior como número de municípios com fornecimento, total de dinheiro recebido.
 #' @export
-carrega_info_fornecimento <- function(ano_inicial, ano_final, cnpjs_datas_contratos) {
+carrega_info_fornecimento <- function(db_user, ano_inicial, ano_final, cnpjs_datas_contratos) {
     datas_lista <- cnpjs_datas_contratos %>%
         distinct(dt_Inicio) %>%
         mutate(dt_Inicio = as.character(dt_Inicio)) %>%
@@ -24,7 +25,7 @@ carrega_info_fornecimento <- function(ano_inicial, ano_final, cnpjs_datas_contra
 
     ## Ano inicial considerado para o cálculo das informações de empenhos eé o ano inicial do SAGRES.
     ano_inicial_sagres <- 2003
-    empenhos_data <- carrega_empenhos_data_limite(ano_inicial_sagres, ano_final, cnpjs_datas_contratos)
+    empenhos_data <- carrega_empenhos_data_limite(db_user, ano_inicial_sagres, ano_final, cnpjs_datas_contratos)
 
     ## Separa nome dos Credores
     cnpjs_nome <- empenhos_data %>%

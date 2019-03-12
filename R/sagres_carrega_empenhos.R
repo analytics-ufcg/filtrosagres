@@ -13,16 +13,17 @@
 #'         \item{vl_Pago}{Valor dos pagamentos associados ao empenho}
 #'         \item{vl_Estornado}{Valor dos estornos associados ao empenho (quando houver)}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do intervalo de tempo
 #' @param ano_final Ano final do intervalo de tempo
 #' @param lista_cnpjs Lista com os CNPJ's dos credores de interesse
 #' @return Data frame com informações do empenho, do valor de pagamentos associados a este empenho e o valor estornado associado aos pagamentos
 #' @export
-carrega_empenhos <- function(ano_inicial = 2014, ano_final = 2014, lista_cnpjs) {
+carrega_empenhos <- function(db_user, ano_inicial = 2014, ano_final = 2014, lista_cnpjs) {
     sagres <- dbConnect(RMySQL::MySQL(),
                         dbname = "sagres_municipal",
-                        group = "ministerio-publico",
-                        username = "shiny")
+                        group = "rsagrespb",
+                        username = db_user)
 
     template <- ('
             SELECT cd_UGestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho, nu_Licitacao,
@@ -84,16 +85,17 @@ carrega_empenhos <- function(ano_inicial = 2014, ano_final = 2014, lista_cnpjs) 
 #'         \item{vl_Pago}{Valor dos pagamentos associados ao empenho}
 #'         \item{vl_Estornado}{Valor dos estornos associados ao empenho (quando houver)}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do intervalo de tempo
 #' @param ano_final Ano final do intervalo de tempo
 #' @param cnpjs_datas_contratos Dataframe de CNPJ's de interesse e datas de início de contrato para o cálculo das informações de fornecimento (nu_CPFCNPJ, dt_Inicio)
 #' @return Data frame com informações do empenho, do valor de pagamentos associados a este empenho e o valor estornado associado aos pagamentos
 #' @export
-carrega_empenhos_data_limite <- function(ano_inicial = 2014, ano_final = 2014, cnpjs_datas_contratos) {
+carrega_empenhos_data_limite <- function(db_user, ano_inicial = 2014, ano_final = 2014, cnpjs_datas_contratos) {
     sagres <- dbConnect(RMySQL::MySQL(),
                         dbname = "sagres_municipal",
-                        group = "ministerio-publico",
-                        username = "shiny")
+                        group = "rsagrespb",
+                        username = db_user)
 
     ## Lista de CNPJS distintos
     lista_cnpjs <- cnpjs_datas_contratos %>%

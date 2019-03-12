@@ -1,14 +1,15 @@
 #' @title Carrega informações de credores
 #' @description Recupera informações de empenhos a partir de um CPF/CNPJ e uma data limite. As informações são o total pago e o total estornado
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param cd_Credor Código do Credor (CPF ou CNPJ)
 #' @param dt_Inicio Data limite para a data do pagamento e do estorno
 #' @return Lista com dois data frames: um contendo as informações do total pago por ano e outro contendo informações do total estornado por ano
 #' @export
-info_credor_data <- function(cd_Credor, dt_Inicio) {
+info_credor_data <- function(db_user, cd_Credor, dt_Inicio) {
     conn <- dbConnect(RMySQL::MySQL(),
                       dbname = "sagres_municipal",
-                      group = "ministerio-publico",
-                      username = "shiny")
+                      group = "rsagrespb",
+                      username = db_user)
 
     template <- ('
                     SELECT cd_UGestora, dt_Ano, cd_UnidOrcamentaria, nu_Empenho, nu_Licitacao, tp_Licitacao, cd_Credor, no_Credor

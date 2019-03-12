@@ -7,14 +7,15 @@
 #'         \item{qt_Propostas}{Quantidade de propostas feitas pela empresa até a assinatura do contrato}
 #'         \item{md_Propostas}{Quantidade média de propostas feitas por ano pela empresa até a assinatura do contrato}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do intervalo de tempo (limite inferior). Default é 2011.
 #' @param ano_final Ano final do intervalo de tempo (limite superior). Default é 2016.
 #' @param cnpjs_datas_contratos Lista de CNPJ's e de datas de início de contrato para o cálculo das informações das propostas.
 #' @return Data frame com informações de quantas propostas foram feitas por uma determinada empresa até uma data limite.
 #' @export
-carrega_info_proposta <- function(ano_inicial = 2011, ano_final = 2016, cnpjs_datas_contratos) {
+carrega_info_proposta <- function(db_user, ano_inicial = 2011, ano_final = 2016, cnpjs_datas_contratos) {
     ano_inicial_sagres <- 2003
-    propostas <- carrega_propostas_licitacao(ano_inicial_sagres, ano_final)
+    propostas <- carrega_propostas_licitacao(db_user, ano_inicial_sagres, ano_final)
 
     propostas_filtradas_fornecedores <- cnpjs_datas_contratos %>%
         left_join(propostas, by = "nu_CPFCNPJ") %>%

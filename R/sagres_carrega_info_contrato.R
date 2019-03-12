@@ -9,13 +9,14 @@
 #'         \item{md_Contratos}{Valor médio obtido pelo credor em todos os contratos realizados}
 #'         \item{qt_Contratos}{Quantidade de contratos firmados pelo credor}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param dados_contrato Informações dos contratos com informando o valor total do contrato e o montante recebido por ano (cd_UGestora, nu_Contrato, nu_CPFCNPJ, dt_Inicio, vl_Contrato, vl_GanhoAnual)
 #' @param ano_inicial Ano inicial do intervalo de tempo (limite inferior). Default é 2011.
 #' @param ano_final Ano final do intervalo de tempo (limite superior). Default é 2016.
 #' @param limite_inferior Menor valor de contrato a ser considerado ao calcular as tipologias
 #' @return Data frame com informações do contrato. Ex: Razão entre o valor do contrato e o montante recebido
 #' @export
-carrega_info_contrato <- function(dados_contrato, ano_inicial = 2011, ano_final = 2016, limite_inferior = 0) {
+carrega_info_contrato <- function(db_user, dados_contrato, ano_inicial = 2011, ano_final = 2016, limite_inferior = 0) {
     ## Soma o valor recebido pela empresa considerando todos os pagamentos anteriores a data de início do contrato
     contratos <- dados_contrato %>%
         select(cd_UGestora, nu_Contrato, nu_CPFCNPJ, dt_Inicio, vl_TotalContrato, vl_Ganho)
@@ -30,7 +31,7 @@ carrega_info_contrato <- function(dados_contrato, ano_inicial = 2011, ano_final 
         distinct(nu_CPFCNPJ, dt_Inicio)
 
     ano_inicial_sagres <- 2003
-    contratos_all <- carrega_contratos(ano_inicial_sagres, ano_final, limite_inferior)
+    contratos_all <- carrega_contratos(db_user, ano_inicial_sagres, ano_final, limite_inferior)
 
     # Calcula a quantidade de contratos por CNPJ e data (tomando como limite superior a data de início dos contratos para os CNPJ's)
     contratos_merge <- cnpjs_contratos %>%

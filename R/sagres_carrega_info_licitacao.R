@@ -11,23 +11,24 @@
 #'         \item{md_LicitacoesParticipou}{Quantidade média anual de licitações em que o credor participou até a data de um contrato}
 #'         \item{md_LicitacoesVenceu}{Quantidade média anual de licitações em que o credor venceu até a data de um contrato}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do intervalo de tempo (limite inferior). Default é 2011.
 #' @param ano_final Ano final do intervalo de tempo (limite superior). Default é 2016.
 #' @param cnpjs_datas_contratos Lista de CNPJ's e de datas de início de contrato para o cálculo das informações de licitação
 #' @return Data frame com informações da licitação. Para cada empresa (CNPJ) informações sobre a quantidade de licitações e o montante de dinheiro envolvido.
 #' @export
-carrega_info_licitacao <- function(ano_inicial = 2011, ano_final = 2016, cnpjs_datas_contratos) {
+carrega_info_licitacao <- function(db_user, ano_inicial = 2011, ano_final = 2016, cnpjs_datas_contratos) {
     ano_inicial_sagres <- 2003
     ## Carrega licitações, propostas e vencedores das licitações
-    licitacoes <- carrega_licitacoes(ano_inicial_sagres, ano_final)
+    licitacoes <- carrega_licitacoes(db_user, ano_inicial_sagres, ano_final)
 
     lista_cnpjs <- cnpjs_datas_contratos %>%
       distinct(nu_CPFCNPJ) %>%
       pull(nu_CPFCNPJ)
 
-    participacoes <- carrega_participantes(lista_cnpjs)
+    participacoes <- carrega_participantes(db_user, lista_cnpjs)
 
-    licitacoes_vencedores <- carrega_licitacoes_vencedores(ano_inicial_sagres, ano_final)
+    licitacoes_vencedores <- carrega_licitacoes_vencedores(db_user, ano_inicial_sagres, ano_final)
 
     ## Cruza as propostas para licitações (a partir da lista de cnpjs) com todas as licitações do sagres usando a chave de licitação
     licitacoes_fornecedor <- participacoes %>%

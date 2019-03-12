@@ -9,15 +9,16 @@
 #'         \item{dt_Homologacao}{Data em que a licitação foi homologada}
 #'         \item{vl_Licitacao}{Valor da licitação}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do intervalo de tempo (limite inferior). Default é 2011.
 #' @param ano_final Ano final do intervalo de tempo (limite superior). Default é 2016.
 #' @return Data frame com informações da licitação. Para cada empresa (CNPJ) informações sobre a quantidade de licitações e o montante de dinheiro envolvido por ano
 #' @export
-carrega_licitacoes <- function(ano_inicial = 2011, ano_final = 2016){
+carrega_licitacoes <- function(db_user, ano_inicial = 2011, ano_final = 2016){
     sagres <- dbConnect(RMySQL::MySQL(),
                         dbname = "sagres_municipal",
-                        group = "ministerio-publico",
-                        username = "shiny")
+                        group = "rsagrespb",
+                        username = db_user)
 
     template <- ('
                 SELECT cd_UGestora, nu_Licitacao, tp_Licitacao, dt_Ano, dt_Homologacao, vl_Licitacao
@@ -49,14 +50,15 @@ carrega_licitacoes <- function(ano_inicial = 2011, ano_final = 2016){
 #'         \item{dt_MesAno}{Data em que a licitação foi homologada (Mês e ano)}
 #'         \item{nu_CPFCNPJ}{Código do credor (CPF/CNPJ)}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param lista_cnpjs Lista de CNPJ's que se quer pesquisar
 #' @return Data frame com informações de participações em licitação para cada CNPJ da lista de CNPJ's.
 #' @export
-carrega_participantes <- function(lista_cnpjs) {
+carrega_participantes <- function(db_user, lista_cnpjs) {
     sagres <- dbConnect(RMySQL::MySQL(),
                         dbname = "sagres_municipal",
-                        group = "ministerio-publico",
-                        username = "shiny")
+                        group = "rsagrespb",
+                        username = db_user)
 
     template <- ('
                 SELECT *
@@ -87,15 +89,16 @@ carrega_participantes <- function(lista_cnpjs) {
 #'         \item{cd_Credor}{Código do credor (CPF/CNPJ)}
 #'         \item{min_dt_Empenho}{Data do primeiro empenho}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do período de tempo
 #' @param ano_final Ano final do período de tempo
 #' @return Data frame com informações da licitação e de seus vencedores
 #' @export
-carrega_licitacoes_vencedores <- function(ano_inicial = 2011, ano_final = 2016) {
+carrega_licitacoes_vencedores <- function(db_user, ano_inicial = 2011, ano_final = 2016) {
     sagres <- dbConnect(RMySQL::MySQL(),
                         dbname = "sagres_municipal",
-                        group = "ministerio-publico",
-                        username = "shiny")
+                        group = "rsagrespb",
+                        username = db_user)
 
     template <- ('
                 SELECT cd_UGestora, nu_Licitacao, tp_Licitacao, dt_Ano, dt_Homologacao, vl_Licitacao
@@ -146,15 +149,16 @@ carrega_licitacoes_vencedores <- function(ano_inicial = 2011, ano_final = 2016) 
 #'         \item{cd_SubGrupoItem}{Código do subgrupo do item ao qual se refere uma proposta}
 #'         \item{vl_Ofertado}{Valor ofertado pelo objeto da licitação}
 #'     }
+#' @param db_user Usuario utilizado para conexão no BD
 #' @param ano_inicial Ano inicial do intervalo de tempo (limite inferior). Default é 2011.
 #' @param ano_final Ano final do intervalo de tempo (limite superior). Default é 2016.
 #' @return Data frame com informações das propostas para licitações em um intervalo de tempo
 #' @export
-carrega_propostas_licitacao <- function(ano_inicial = 2011, ano_final = 2016) {
+carrega_propostas_licitacao <- function(db_user, ano_inicial = 2011, ano_final = 2016) {
     sagres <- dbConnect(RMySQL::MySQL(),
                         dbname = "sagres_municipal",
-                        group = "ministerio-publico",
-                        username = "shiny")
+                        group = "rsagrespb",
+                        username = db_user)
 
     template <- ('
                 SELECT cd_UGestora, nu_Licitacao, tp_Licitacao, dt_Ano, dt_Homologacao, vl_Licitacao

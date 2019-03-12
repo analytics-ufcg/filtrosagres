@@ -1,7 +1,7 @@
 Package: rsagrespb
 Type: Package
 Title: Carrega informações sobre execucação orçamentária disponíveis na plataforma Sagres (TCE)
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: as.person(c(
     "Júlio Neves <juliocnevess@gmail.com> [aut, cre]", 
     "Gileade Silva [aut]",
