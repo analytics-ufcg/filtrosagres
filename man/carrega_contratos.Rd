@@ -4,10 +4,12 @@
 \alias{carrega_contratos}
 \title{Carrega contratos}
 \usage{
-carrega_contratos(ano_inicial = 2014, ano_final = 2014,
+carrega_contratos(db_user, ano_inicial = 2014, ano_final = 2014,
   limite_inferior = 140000)
 }
 \arguments{
+\item{db_user}{Usuario utilizado para conexão no BD}
+
 \item{ano_inicial}{Ano inicial do intervalo de tempo}
 
 \item{ano_final}{Ano final do intervalo de tempo}

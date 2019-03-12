@@ -4,9 +4,11 @@
 \alias{carrega_participantes}
 \title{Carrega participantes de licitações}
 \usage{
-carrega_participantes(lista_cnpjs)
+carrega_participantes(db_user, lista_cnpjs)
 }
 \arguments{
+\item{db_user}{Usuario utilizado para conexão no BD}
+
 \item{lista_cnpjs}{Lista de CNPJ's que se quer pesquisar}
 }
 \value{

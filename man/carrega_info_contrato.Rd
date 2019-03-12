@@ -4,10 +4,12 @@
 \alias{carrega_info_contrato}
 \title{Carrega informações de um contrato}
 \usage{
-carrega_info_contrato(dados_contrato, ano_inicial = 2011,
+carrega_info_contrato(db_user, dados_contrato, ano_inicial = 2011,
   ano_final = 2016, limite_inferior = 0)
 }
 \arguments{
+\item{db_user}{Usuario utilizado para conexão no BD}
+
 \item{dados_contrato}{Informações dos contratos com informando o valor total do contrato e o montante recebido por ano (cd_UGestora, nu_Contrato, nu_CPFCNPJ, dt_Inicio, vl_Contrato, vl_GanhoAnual)}
 
 \item{ano_inicial}{Ano inicial do intervalo de tempo (limite inferior). Default é 2011.}

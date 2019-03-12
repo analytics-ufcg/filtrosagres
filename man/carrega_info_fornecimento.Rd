@@ -4,9 +4,12 @@
 \alias{carrega_info_fornecimento}
 \title{Carrega informações de fornecimento}
 \usage{
-carrega_info_fornecimento(ano_inicial, ano_final, cnpjs_datas_contratos)
+carrega_info_fornecimento(db_user, ano_inicial, ano_final,
+  cnpjs_datas_contratos)
 }
 \arguments{
+\item{db_user}{Usuario utilizado para conexão no BD}
+
 \item{ano_inicial}{Ano inicial do intervalo de tempo}
 
 \item{ano_final}{Ano final do intervalo de tempo}

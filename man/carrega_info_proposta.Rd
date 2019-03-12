@@ -4,10 +4,12 @@
 \alias{carrega_info_proposta}
 \title{Carrega informações de propostas}
 \usage{
-carrega_info_proposta(ano_inicial = 2011, ano_final = 2016,
+carrega_info_proposta(db_user, ano_inicial = 2011, ano_final = 2016,
   cnpjs_datas_contratos)
 }
 \arguments{
+\item{db_user}{Usuario utilizado para conexão no BD}
+
 \item{ano_inicial}{Ano inicial do intervalo de tempo (limite inferior). Default é 2011.}
 
 \item{ano_final}{Ano final do intervalo de tempo (limite superior). Default é 2016.}

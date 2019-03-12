@@ -4,9 +4,11 @@
 \alias{info_credor_data}
 \title{Carrega informações de credores}
 \usage{
-info_credor_data(cd_Credor, dt_Inicio)
+info_credor_data(db_user, cd_Credor, dt_Inicio)
 }
 \arguments{
+\item{db_user}{Usuario utilizado para conexão no BD}
+
 \item{cd_Credor}{Código do Credor (CPF ou CNPJ)}
 
 \item{dt_Inicio}{Data limite para a data do pagamento e do estorno}

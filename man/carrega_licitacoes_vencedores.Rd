@@ -4,9 +4,12 @@
 \alias{carrega_licitacoes_vencedores}
 \title{Carrega vencedores de licitações}
 \usage{
-carrega_licitacoes_vencedores(ano_inicial = 2011, ano_final = 2016)
+carrega_licitacoes_vencedores(db_user, ano_inicial = 2011,
+  ano_final = 2016)
 }
 \arguments{
+\item{db_user}{Usuario utilizado para conexão no BD}
+
 \item{ano_inicial}{Ano inicial do período de tempo}
 
 \item{ano_final}{Ano final do período de tempo}
